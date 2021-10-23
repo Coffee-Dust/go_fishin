@@ -1,6 +1,10 @@
 class Deck
   attr_reader :cards
 
+  def shuffle
+    @cards = @cards.shuffle
+  end
+
   def initialize
     @cards = []
     suits = ["clubs", "diamonds", "hearts", "spades"]
