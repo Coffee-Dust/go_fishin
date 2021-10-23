@@ -4,6 +4,7 @@ class Game < ApplicationRecord
 
   def set_defaults
     self.room_code = generate_room_code
+    self.deck_cards = {cards: Deck.new.cards}.to_json
   end
 
   def generate_room_code
