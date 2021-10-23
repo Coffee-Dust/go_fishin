@@ -13,4 +13,11 @@ class Deck
     end
   end
 
+  def self.new_from_json(cards_json)
+    cards = JSON.parse(cards_json)["cards"]
+    self.new.tap do |deck|
+      deck.instance_variable_set("@cards", cards)
+    end
+  end
+
 end
