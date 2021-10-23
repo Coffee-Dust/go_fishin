@@ -1,4 +1,5 @@
 class Game < ApplicationRecord
+  has_many :players
   before_save :generate_room_code
 
   def generate_room_code
@@ -13,5 +14,5 @@ class Game < ApplicationRecord
       self.room_code = code
     end
   end
-  
+
 end
