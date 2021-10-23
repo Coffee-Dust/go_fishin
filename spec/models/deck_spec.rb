@@ -11,4 +11,10 @@ RSpec.describe Deck, type: :model do
     d = Deck.new
     expect(d.cards.all? {|card| card[:suit] && card[:number]}).to eq(true)
   end
+
+  it "can load deck instance from json" do
+    g = Game.create
+    d = Deck.new_from_json(g.deck_cards)
+    expect(d.cards[0]).to eq({"suit"=>"clubs", "number"=>"ace"})
+  end
 end
