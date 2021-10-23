@@ -14,4 +14,13 @@ RSpec.describe Game, type: :model do
     g.generate_room_code
     expect(Game.find_by(room_code: g.room_code)).to be_nil
   end
+
+  it "has many players" do
+    g = Game.create
+    g.players.create
+    g.players.create
+    
+    expect(g.players.size).to eq(2)
+  end
+
 end
