@@ -2,6 +2,10 @@ class Game < ApplicationRecord
   has_many :players
   after_initialize :set_defaults, unless: :persisted?
 
+  def deck
+    @deck ||= Deck.new_from_json(self.deck_cards)
+  end
+
   def set_defaults
     self.room_code = generate_room_code
     self.deck_cards = {cards: Deck.new.cards}.to_json
