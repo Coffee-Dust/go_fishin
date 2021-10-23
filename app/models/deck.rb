@@ -1,6 +1,13 @@
 class Deck
   attr_reader :cards
 
+  def deal_cards_to(amount, player)
+    if player.class == Player
+      player.cards = self.cards.slice!(0, 7)
+      player.save
+    end
+  end
+
   def shuffle
     @cards = @cards.shuffle
   end
