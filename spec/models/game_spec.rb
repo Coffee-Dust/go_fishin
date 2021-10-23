@@ -23,4 +23,16 @@ RSpec.describe Game, type: :model do
     expect(g.players.size).to eq(2)
   end
 
+  it "correctly parses deck_cards into deck instance" do
+    g = Game.create
+
+    expect(g.deck.class).to eq(Deck)
+  end
+
+  it "has a deck of cards on creation" do
+    g = Game.create
+
+    expect(g.deck.cards.size).to eq(52)
+  end
+
 end
