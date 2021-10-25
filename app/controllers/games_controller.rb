@@ -27,7 +27,15 @@ class GamesController < ApplicationController
       redirect_to games_path, status: 404
     end
   end
-  
+
+  def start
+    @game = Game.find_by(room_code: params[:game_id])
+    if @game && @game.players.include?(current_player) && @game.players.size > 1
+      @game.start
+      current_player.reload
+    end
+    render :show
+  end
 
   def current_player
     @current_player ||= Player.find_by(id: session["player_id"])
