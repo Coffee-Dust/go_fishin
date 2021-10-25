@@ -22,6 +22,10 @@ class GamesController < ApplicationController
   end
 
   def show
-
-  end
+    @game = Game.find_by(room_code: params[:id])
+    if @game && @game.players.include?(helpers.current_player)
+      render :show
+    else
+      redirect_to games_path, status: 404
+    end
 end
