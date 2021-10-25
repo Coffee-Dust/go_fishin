@@ -1,2 +1,9 @@
-<h1>Games#index</h1>
-<p>Find me in app/views/games/index.html.erb</p>
+<h1>Go fish'in</h1>
+<%= form_tag games_join_path do %>
+  <label for="room_code">Enter Room Code To Join Game: </label>
+  <%= text_area_tag :room_code %>
+  <%= submit_tag "Join" %>
+<% end %>
+
+<%= button_to "Create New Game", games_path, method: "POST" %>
+
