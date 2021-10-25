@@ -6,6 +6,14 @@ class Game < ApplicationRecord
     @deck ||= Deck.new_from_json(self.deck_cards)
   end
 
+  def start
+    self.is_started = true
+    for player in self.players do
+      self.deck.deal_cards_to(7, player)
+    end
+    self.save
+  end
+
   def set_defaults
     self.room_code = generate_room_code
     self.deck_cards = {cards: Deck.new.cards}.to_json
