@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+
   def create
     @game = Game.create
     p = @game.players.create
@@ -24,4 +25,6 @@ class GamesController < ApplicationController
     else
       redirect_to games_path, status: 404
     end
+  end
+
 end
