@@ -12,6 +12,7 @@ RSpec.describe Player, type: :model do
     p = g.players.create
 
     g.deck.deal_cards_to(7, g.players[0])
+    p.reload
     expect(p.cards.size).to eq(7)
   end
 
