@@ -12,6 +12,36 @@ RSpec.describe "Games", type: :system do
     end
   end
 
+  describe "Show View" do
+
+    it "Start Game button will start game" do
+      visit "/games"
+      click_button "Create New Game"
+      Game.all.last.players.create
+      visit current_path
+      click_button "Start Game"
+      expect(Game.all.last.is_started).to eq(true)
+    end
+
+    it "will not start with less than 2 players" do
+      visit "/games"
+      click_button "Create New Game"
+      g = Game.all.last
+
+      expect(page).to_not have_button("Start Game")
+    end
+
+    it "will deal 7 cards to each player on_start" do
+      visit "/games"
+      click_button "Create New Game"
+      g = Game.all.last
+      p2 = g.players.create
+      visit current_path
+      click_button "Start Game"
+
+      expect(g.players[1].cards.size).to eq(7)
+    end
+  end
 
   describe "Index View" do
     it "VIEW index: will create new game on button click" do
