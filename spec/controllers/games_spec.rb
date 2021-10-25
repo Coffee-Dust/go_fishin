@@ -2,6 +2,28 @@ require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
 
+  describe "GET /games/:id" do
+
+    before do
+      session["player_id"] = nil
+      @g = Game.create
+
+    end
+
+    it "will only load if the player is part of that game" do
+      post :join, params: {room_code: @g.room_code}
+      get :show, params: {id: @g.room_code}
+
+      expect(response).to have_http_status(:success)
+    end
+
+    it "will display 404 if user is not player in that game" do
+      get :show, params: {id: @g.room_code}
+      expect(response).to have_http_status(:not_found)
+    end
+
+  end
+
   describe "POST /games" do
     it "creates a new game instance" do
       post :create, {}
