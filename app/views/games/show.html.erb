@@ -7,3 +7,7 @@
 <%else%>
   <h4>Waiting on players</h4>
 <% end %>
+
+<% if @game.is_started %>
+  <%= current_player.cards %>
+<% end %>
