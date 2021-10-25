@@ -17,10 +17,6 @@ class GamesController < ApplicationController
     redirect_to game_path(@game.room_code)
   end
 
-  def index
-
-  end
-
   def show
     @game = Game.find_by(room_code: params[:id])
     if @game && @game.players.include?(helpers.current_player)
