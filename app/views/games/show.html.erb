@@ -1,2 +1,9 @@
-<h1>Games#show</h1>
-<p>Find me in app/views/games/show.html.erb</p>
+<h1>Go Fishin Game</h1>
+<h2><em>Room Code: <%= @game.room_code%></em></h2>
+<h4>Players connected: <%= @game.players.size %></h4>
+
+<% if @game.players.size > 1 %>
+  <%= button_to "Start Game", game_start_path(@game.room_code), method: "get" if !@game.is_started %>
+<%else%>
+  <h4>Waiting on players</h4>
+<% end %>
