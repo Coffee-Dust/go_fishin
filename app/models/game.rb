@@ -1,5 +1,6 @@
 class Game < ApplicationRecord
   has_many :players
+  has_one :current_player, class_name: "Player"
   after_initialize :set_defaults, unless: :persisted?
 
   def deck
@@ -11,6 +12,7 @@ class Game < ApplicationRecord
     for player in self.players do
       self.deck.deal_cards_to(7, player)
     end
+    self.current_player = self.players[0]
     self.save
   end
 
