@@ -1,0 +1,6 @@
+<div class="card">
+  <%= image_tag "cards/#{card["number"]}_of_#{card["suit"]}.png" %>
+  <% if current_player.is_turn? %>
+    <%= button_to "Deal Card" %>
+  <% end %>
+</div>
