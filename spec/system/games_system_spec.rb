@@ -41,6 +41,26 @@ RSpec.describe "Games", type: :system do
 
       expect(g.players[1].cards.size).to eq(7)
     end
+
+    it "will allow card dealing for first player" do
+      visit "/games"
+      click_button "Create New Game"
+      g = Game.all.last
+      p2 = g.players.create
+      visit current_path
+      click_button "Start Game"
+
+      expect(page).to have_button("Deal Card")
+    end
+
+    it "will not allow a player to deal when not their turn" do
+      g = Game.create
+      p1 = g.players.create
+      visit "/games"
+      fill_in "room_code", with: g.room_code
+
+      expect(page).to_not have_button("Deal Card")
+    end
   end
 
   describe "Index View" do
