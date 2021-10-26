@@ -9,5 +9,6 @@
 <% end %>
 
 <% if @game.is_started %>
-  <%= current_player.cards %>
+  <h4>Your cards: </h4>
+  <%= render partial: "card", collection: @current_player.cards %>
 <% end %>
